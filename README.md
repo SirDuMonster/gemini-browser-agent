@@ -1,6 +1,6 @@
 # Gemini Browser Agent
 
-A Chrome extension that uses Google's Gemini 2.0 Pro AI to automate browser tasks through natural language commands. Simply describe what you want to do, and the AI agent will navigate, click, type, and interact with web pages on your behalf.
+A Chrome extension that uses Google's Gemini 3 Flash AI to automate browser tasks through natural language commands. Simply describe what you want to do, and the AI agent will navigate, click, type, and interact with web pages on your behalf.
 
 ![Version](https://img.shields.io/badge/version-0.1.12-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -61,7 +61,7 @@ User Input → Gemini AI → Action Plan → Execute on Page → Verify Result
 
 ## Getting an API Key
 
-This extension uses [OpenRouter](https://openrouter.ai/) to access Gemini 2.0 Pro.
+This extension uses [OpenRouter](https://openrouter.ai/) to access Gemini 3 Flash.
 
 1. Create an account at [openrouter.ai](https://openrouter.ai/)
 2. Add credits to your account
