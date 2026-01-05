@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate Gemini Icons</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1a1a;
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 { margin-bottom: 20px; }
+    .icons { display: flex; gap: 20px; justify-content: center; margin: 30px 0; }
+    .icon-box {
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .icon-box p { margin-top: 10px; color: #888; }
+    canvas { display: block; margin: 0 auto; }
+    button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #4285f4 0%, #9b72cb 50%, #d96570 100%);
+      color: white;
+      border: none;
+      border-radius: 24px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { opacity: 0.9; }
+    .instructions {
+      max-width: 500px;
+      margin: 30px auto;
+      text-align: left;
+      background: #2a2a2a;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #aaa;
+    }
+    .instructions ol { padding-left: 20px; }
+    .instructions li { margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <h1>Gemini for Chrome - Icon Generator</h1>
+
+  <div class="icons">
+    <div class="icon-box">
+      <canvas id="icon128" width="128" height="128"></canvas>
+      <p>128x128</p>
+    </div>
+    <div class="icon-box">
+      <canvas id="icon48" width="48" height="48"></canvas>
+      <p>48x48</p>
+    </div>
+    <div class="icon-box">
+      <canvas id="icon16" width="16" height="16"></canvas>
+      <p>16x16</p>
+    </div>
+  </div>
+
+  <button onclick="downloadAll()">Download All Icons</button>
+
+  <div class="instructions">
+    <strong>Instructions:</strong>
+    <ol>
+      <li>Click "Download All Icons" to save the PNG files</li>
+      <li>Move the downloaded files to: <code>public/icons/</code></li>
+      <li>Replace the existing icon16.png, icon48.png, icon128.png</li>
+      <li>Run <code>npm run build</code> to rebuild the extension</li>
+    </ol>
+  </div>
+
+  <script>
+    function drawIcon(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      const scale = size / 128;
+
+      // Clear
+      ctx.clearRect(0, 0, size, size);
+
+      // Create gradient
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#4285f4');
+      gradient.addColorStop(0.5, '#9b72cb');
+      gradient.addColorStop(1, '#d96570');
+
+      // Draw rounded rectangle background
+      const padding = 8 * scale;
+      const rectSize = size - (padding * 2);
+      const radius = 24 * scale;
+
+      ctx.beginPath();
+      ctx.roundRect(padding, padding, rectSize, rectSize, radius);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // Draw 4-point star
+      const cx = size / 2;
+      const cy = size / 2;
+      const outer = 40 * scale;  // Distance to points
+      const inner = 8 * scale;   // Distance to inner points
+
+      ctx.beginPath();
+      // Top point
+      ctx.moveTo(cx, cy - outer);
+      // To right inner
+      ctx.lineTo(cx + inner, cy - inner);
+      // Right point
+      ctx.lineTo(cx + outer, cy);
+      // To bottom inner
+      ctx.lineTo(cx + inner, cy + inner);
+      // Bottom point
+      ctx.lineTo(cx, cy + outer);
+      // To left inner
+      ctx.lineTo(cx - inner, cy + inner);
+      // Left point
+      ctx.lineTo(cx - outer, cy);
+      // To top inner
+      ctx.lineTo(cx - inner, cy - inner);
+      ctx.closePath();
+
+      // Add subtle glow
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+      ctx.shadowBlur = 4 * scale;
+      ctx.fillStyle = 'white';
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // Draw all sizes
+    drawIcon(document.getElementById('icon128'), 128);
+    drawIcon(document.getElementById('icon48'), 48);
+    drawIcon(document.getElementById('icon16'), 16);
+
+    function downloadCanvas(canvas, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function downloadAll() {
+      downloadCanvas(document.getElementById('icon16'), 'icon16.png');
+      setTimeout(() => downloadCanvas(document.getElementById('icon48'), 'icon48.png'), 100);
+      setTimeout(() => downloadCanvas(document.getElementById('icon128'), 'icon128.png'), 200);
+    }
+  </script>
+</body>
+</html>

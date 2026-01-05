@@ -1,0 +1,155 @@
+/**
+ * Content Script Styles
+ * Styles for element highlighting and visual feedback
+ */
+
+/* ============ Element Highlight ============ */
+
+.gemini-agent-highlight {
+  /* Animated border */
+  outline: 3px solid #6366f1 !important;
+  outline-offset: 2px !important;
+
+  /* Box shadow for better visibility */
+  box-shadow:
+    0 0 0 2px rgba(99, 102, 241, 0.2),
+    0 0 20px rgba(99, 102, 241, 0.4),
+    inset 0 0 20px rgba(99, 102, 241, 0.1) !important;
+
+  /* Ensure it's visible */
+  position: relative !important;
+  z-index: 999999 !important;
+
+  /* Pulse animation */
+  animation: gemini-agent-pulse 1.5s ease-in-out infinite !important;
+}
+
+@keyframes gemini-agent-pulse {
+  0%, 100% {
+    outline-color: #6366f1;
+    box-shadow:
+      0 0 0 2px rgba(99, 102, 241, 0.2),
+      0 0 20px rgba(99, 102, 241, 0.4),
+      inset 0 0 20px rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    outline-color: #8b5cf6;
+    box-shadow:
+      0 0 0 2px rgba(139, 92, 246, 0.3),
+      0 0 30px rgba(139, 92, 246, 0.6),
+      inset 0 0 30px rgba(139, 92, 246, 0.2);
+  }
+}
+
+/* ============ Visual Cursor (Future) ============ */
+
+.gemini-agent-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999999;
+  transition: transform 0.1s ease-out;
+  mix-blend-mode: screen;
+}
+
+.gemini-agent-cursor::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.8);
+}
+
+/* ============ Click Effect ============ */
+
+.gemini-agent-click-effect {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #6366f1;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999999;
+  animation: gemini-agent-click-ripple 0.6s ease-out forwards;
+}
+
+@keyframes gemini-agent-click-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ============ Status Indicator (Future) ============ */
+
+.gemini-agent-status {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(17, 24, 39, 0.95);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999999;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.gemini-agent-status-icon {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: gemini-agent-status-pulse 2s ease-in-out infinite;
+}
+
+.gemini-agent-status-icon.planning {
+  background: #f59e0b;
+}
+
+.gemini-agent-status-icon.executing {
+  background: #10b981;
+}
+
+.gemini-agent-status-icon.error {
+  background: #ef4444;
+}
+
+@keyframes gemini-agent-status-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+/* ============ Ensure Visibility ============ */
+
+/* Override any page styles that might hide our highlights */
+.gemini-agent-highlight,
+.gemini-agent-cursor,
+.gemini-agent-click-effect,
+.gemini-agent-status {
+  visibility: visible !important;
+  display: block !important;
+  opacity: 1 !important;
+}
