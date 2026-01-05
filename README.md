@@ -34,7 +34,7 @@ User Input → Gemini AI → Action Plan → Execute on Page → Verify Result
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/gemini-browser-agent.git
+   git clone https://github.com/ubbag/gemini-browser-agent.git
    cd gemini-browser-agent
    ```
 
@@ -57,18 +57,18 @@ User Input → Gemini AI → Action Plan → Execute on Page → Verify Result
 5. **Configure API Key**
    - Click the extension icon
    - Open Settings (gear icon)
-   - Enter your OpenRouter API key
+   - Enter your Google AI API key
 
 ## Getting an API Key
 
-This extension uses [OpenRouter](https://openrouter.ai/) to access Gemini 3 Flash.
+This extension uses [Google AI Studio](https://aistudio.google.com/) to access Gemini 3 Flash.
 
-1. Create an account at [openrouter.ai](https://openrouter.ai/)
-2. Add credits to your account
-3. Generate an API key
-4. Paste it in the extension settings
+1. Go to [Google AI Studio](https://aistudio.google.com/)
+2. Sign in with your Google account
+3. Click "Get API key" → "Create API key"
+4. Copy the key and paste it in the extension settings
 
-**Cost**: Approximately $0.01-0.05 per task depending on complexity.
+**Cost**: Google AI offers a free tier with generous limits. See [pricing](https://ai.google.dev/pricing) for details.
 
 ## Usage
 
@@ -104,7 +104,7 @@ Go to Amazon, search for "wireless headphones", and sort by price low to high
 - **Frontend**: React 18, TypeScript
 - **Build**: Vite
 - **Extension**: Chrome Manifest V3
-- **AI**: Gemini 2.0 Pro via OpenRouter
+- **AI**: Gemini 3 Flash via Google AI API
 - **Styling**: CSS with CSS Variables
 
 ## Project Structure
@@ -153,7 +153,7 @@ Settings available in the extension popup:
 
 | Setting | Description | Default |
 |---------|-------------|---------|
-| API Key | Your OpenRouter API key | Required |
+| API Key | Your Google AI API key | Required |
 | Show Thinking | Display AI reasoning steps | Off |
 | Max Actions | Maximum actions per task | 50 |
 | Screenshot Quality | Image quality (0.1-1.0) | 0.8 |
@@ -213,7 +213,7 @@ Popup UI ←→ Service Worker ←→ Content Script ←→ Web Page
 
 ### API errors
 - Verify your API key is correct
-- Check your OpenRouter credit balance
+- Check your Google AI API quota
 - Ensure you have internet connection
 
 ### Debug mode
@@ -225,7 +225,7 @@ Open the service worker console to see detailed logs:
 ## Security
 
 - API keys are stored locally in Chrome storage
-- No data is sent to external servers except OpenRouter
+- No data is sent to external servers except Google AI
 - Screenshots are processed locally and sent only to the AI
 - The extension cannot access `chrome://` pages
 
@@ -252,7 +252,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## Acknowledgments
 
 - [Google Gemini](https://deepmind.google/technologies/gemini/) for the AI model
-- [OpenRouter](https://openrouter.ai/) for API access
+- [Google AI Studio](https://aistudio.google.com/) for API access
 - [Vite](https://vitejs.dev/) for the build system
 - [CRXJS](https://crxjs.dev/vite-plugin/) for Chrome extension support
 
